@@ -13,12 +13,19 @@ class Instance {
 
     private final ArrayList<Job> jobs;
 
+    private final int d;
+
     Instance(InputArguments args) throws IOException {
         this.args = args;
         String filename = String.format(FILE_FORMAT, args.getN());
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             jobs = retrieveJobs(reader);
         }
+        d = retrieveD();
+    }
+
+    public ArrayList<Job> getJobs() {
+        return jobs;
     }
 
     private ArrayList<Job> retrieveJobs(BufferedReader reader) throws IOException {
@@ -27,7 +34,6 @@ class Instance {
         for (int i = 0; i < jobsCount; i++) {
             Job job = new Job(reader.readLine());
             result.add(job);
-            System.out.println(job);
         }
         return result;
     }
@@ -47,5 +53,10 @@ class Instance {
             }
         }
         return 0;
+    }
+
+    private int retrieveD() {
+        int sumP = jobs.stream().mapToInt(Job::getP).sum();
+        return (int) Math.floor(sumP * args.getH());
     }
 }
