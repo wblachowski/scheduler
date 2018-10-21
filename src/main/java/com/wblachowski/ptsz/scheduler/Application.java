@@ -10,7 +10,7 @@ public class Application {
     private void start(String[] args) {
         InputArguments arguments = new InputArguments(args);
         try {
-            Instance instance = new Instance(arguments);
+            new Instance(arguments);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

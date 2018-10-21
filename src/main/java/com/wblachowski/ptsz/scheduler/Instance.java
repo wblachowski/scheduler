@@ -1,25 +1,51 @@
 package main.java.com.wblachowski.ptsz.scheduler;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Instance {
+class Instance {
 
     private static final String FILE_FORMAT = "sch%d.txt";
 
-    private ArrayList<Job> jobs;
+    private final InputArguments args;
 
-    Instance(InputArguments arg) throws IOException {
-        String filename = String.format(FILE_FORMAT, arg.getN());
-        List<String> lines = Files.readAllLines(Paths.get(filename));
-        jobs = retrieveJobs(lines);
+    private final ArrayList<Job> jobs;
+
+    Instance(InputArguments args) throws IOException {
+        this.args = args;
+        String filename = String.format(FILE_FORMAT, args.getN());
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            jobs = retrieveJobs(reader);
+        }
     }
 
-    private ArrayList<Job> retrieveJobs(List<String> lines){
+    private ArrayList<Job> retrieveJobs(BufferedReader reader) throws IOException {
         ArrayList<Job> result = new ArrayList<>();
+        int jobsCount = jumpToExactJob(reader);
+        for (int i = 0; i < jobsCount; i++) {
+            Job job = new Job(reader.readLine());
+            result.add(job);
+            System.out.println(job);
+        }
         return result;
+    }
+
+    private int jumpToExactJob(BufferedReader reader) throws IOException {
+        int problemsCount = Integer.parseInt(reader.readLine().trim());
+        int currentJob = 0;
+        int ourJob = args.getK();
+        for (int i = 0; i < problemsCount; i++) {
+            currentJob++;
+            int jobsCount = Integer.parseInt(reader.readLine().trim());
+            if (currentJob == ourJob) {
+                return jobsCount;
+            }
+            for (int j = 0; j < jobsCount; j++) {
+                reader.readLine();
+            }
+        }
+        return 0;
     }
 }
