@@ -12,4 +12,16 @@ public class Job {
         a = Integer.parseInt(elements[1]);
         b = Integer.parseInt(elements[2]);
     }
+
+    public int getP() {
+        return p;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public int getB() {
+        return b;
+    }
 }
