@@ -10,7 +10,8 @@ public class Application {
     private void start(String[] args) {
         InputArguments arguments = new InputArguments(args);
         try {
-            new Instance(arguments);
+            Instance instance = new Instance(arguments);
+            System.out.println(instance.getJobs());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

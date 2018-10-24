@@ -32,7 +32,7 @@ class Instance {
         ArrayList<Job> result = new ArrayList<>();
         int jobsCount = jumpToExactJob(reader);
         for (int i = 0; i < jobsCount; i++) {
-            Job job = new Job(reader.readLine());
+            Job job = new Job(i + 1, reader.readLine());
             result.add(job);
         }
         return result;

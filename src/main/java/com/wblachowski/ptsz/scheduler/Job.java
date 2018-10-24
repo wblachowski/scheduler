@@ -2,11 +2,13 @@ package main.java.com.wblachowski.ptsz.scheduler;
 
 public class Job {
 
+    private final int i;
     private final int p;
     private final int a;
     private final int b;
 
-    Job(String line) {
+    Job(int index, String line) {
+        this.i=index;
         String[] elements = line.trim().split("\\s+");
         p = Integer.parseInt(elements[0]);
         a = Integer.parseInt(elements[1]);
@@ -28,6 +30,7 @@ public class Job {
     @Override
     public String toString() {
         return "Job{" +
+                "i=" + i +
                 "p=" + p +
                 ", a=" + a +
                 ", b=" + b +
