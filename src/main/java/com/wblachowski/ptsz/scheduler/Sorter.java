@@ -2,12 +2,13 @@ package com.wblachowski.ptsz.scheduler;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.common.collect.Lists;
 
 public class Sorter {
 
     private final int d;
 
-    private final List<Job> jobs;
+    private List<Job> jobs;
 
     public Sorter(Instance instance) {
         this.d = instance.getD();
@@ -19,7 +20,7 @@ public class Sorter {
     }
 
     public void sort() {
-
+        jobs = Lists.reverse(jobs);
     }
 
     public int getResult() {
