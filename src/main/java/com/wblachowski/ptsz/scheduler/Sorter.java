@@ -1,4 +1,4 @@
-package main.java.com.wblachowski.ptsz.scheduler;
+package com.wblachowski.ptsz.scheduler;
 
 import java.util.ArrayList;
 import java.util.List;

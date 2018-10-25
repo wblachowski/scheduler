@@ -1,4 +1,4 @@
-package main.java.com.wblachowski.ptsz.scheduler;
+package com.wblachowski.ptsz.scheduler;
 
 public class InputArguments {
 
