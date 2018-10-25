@@ -12,6 +12,9 @@ public class Application {
         try {
             Instance instance = new Instance(arguments);
             System.out.println(instance.getJobs());
+            Sorter sorter = new Sorter(instance);
+            sorter.sort();
+            System.out.println(sorter.getJobs());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

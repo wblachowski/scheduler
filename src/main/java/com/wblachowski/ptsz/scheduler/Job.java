@@ -31,7 +31,7 @@ public class Job {
     public String toString() {
         return "Job{" +
                 "i=" + i +
-                "p=" + p +
+                ", p=" + p +
                 ", a=" + a +
                 ", b=" + b +
                 '}';

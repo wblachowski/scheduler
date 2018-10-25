@@ -28,6 +28,10 @@ class Instance {
         return jobs;
     }
 
+    public int getD() {
+        return d;
+    }
+
     private ArrayList<Job> retrieveJobs(BufferedReader reader) throws IOException {
         ArrayList<Job> result = new ArrayList<>();
         int jobsCount = jumpToExactJob(reader);
