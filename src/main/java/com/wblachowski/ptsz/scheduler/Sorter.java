@@ -14,12 +14,27 @@ public class Sorter {
         this.jobs = new ArrayList<>(instance.getJobs());
     }
 
-    public List<Job> getJobs(){
+    public List<Job> getJobs() {
         return jobs;
     }
 
-    public void sort(){
+    public void sort() {
 
+    }
+
+    public int getResult() {
+        int sum = 0;
+        int time = 0;
+        for (Job job : jobs) {
+            int endtime = time + job.getP();
+            if (endtime < d) {
+                sum += job.getA();
+            } else if (endtime > d) {
+                sum += job.getB();
+            }
+            time += job.getP();
+        }
+        return sum;
     }
 
 }
