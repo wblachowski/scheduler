@@ -1,6 +1,7 @@
 package com.wblachowski.ptsz.scheduler;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import com.google.common.collect.Lists;
 
@@ -21,10 +22,13 @@ public class Sorter {
 
     public void sort() {
         ArrayList<Job> jobsByA = new ArrayList<>(jobs);
-        jobsByA.sort((j1,j2) -> (Integer.compare(j1.getA(),j2.getA())));
+        jobsByA.sort(Comparator.comparingInt(Job::getA));
 
         ArrayList<Job> jobsByB = new ArrayList<>(jobs);
-        jobsByB.sort((j1,j2) -> (Integer.compare(j2.getB(),j1.getB())));
+        jobsByB.sort(Comparator.comparingInt(Job::getB));
+
+        ArrayList<Job> jobsByAB = new ArrayList<>(jobs);
+        jobsByAB.sort(Comparator.comparingInt(j -> j.getA() + j.getB()));
 
     }
 
