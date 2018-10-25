@@ -20,7 +20,12 @@ public class Sorter {
     }
 
     public void sort() {
-        jobs = Lists.reverse(jobs);
+        ArrayList<Job> jobsByA = new ArrayList<>(jobs);
+        jobsByA.sort((j1,j2) -> (Integer.compare(j1.getA(),j2.getA())));
+
+        ArrayList<Job> jobsByB = new ArrayList<>(jobs);
+        jobsByB.sort((j1,j2) -> (Integer.compare(j2.getB(),j1.getB())));
+
     }
 
     public int getResult() {
@@ -38,5 +43,4 @@ public class Sorter {
         }
         return sum;
     }
-
 }
