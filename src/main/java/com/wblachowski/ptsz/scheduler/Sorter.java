@@ -27,10 +27,11 @@ public class Sorter {
         int time = 0;
         for (Job job : jobs) {
             int endtime = time + job.getP();
+            int diff = Math.abs(endtime - d);
             if (endtime < d) {
-                sum += job.getA();
+                sum += job.getA() * diff;
             } else if (endtime > d) {
-                sum += job.getB();
+                sum += job.getB() * diff;
             }
             time += job.getP();
         }
