@@ -1,5 +1,7 @@
 package com.wblachowski.ptsz.scheduler;
 
+import java.util.Objects;
+
 public class Job {
 
     private final int i;
