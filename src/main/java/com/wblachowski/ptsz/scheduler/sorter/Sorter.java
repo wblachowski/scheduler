@@ -23,6 +23,10 @@ public abstract class Sorter {
         return jobs;
     }
 
+    public int getD() {
+        return d;
+    }
+
     public int getResult() {
         int sum = 0;
         int time = 0;
@@ -40,4 +44,8 @@ public abstract class Sorter {
     }
 
     public abstract void sort();
+
+    protected void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
 }
