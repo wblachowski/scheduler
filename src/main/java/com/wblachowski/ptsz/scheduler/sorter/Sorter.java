@@ -1,11 +1,14 @@
-package com.wblachowski.ptsz.scheduler;
+package com.wblachowski.ptsz.scheduler.sorter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import com.google.common.collect.Lists;
 
-public class Sorter {
+import com.google.common.collect.Lists;
+import com.wblachowski.ptsz.scheduler.Instance;
+import com.wblachowski.ptsz.scheduler.Job;
+
+public abstract class Sorter {
 
     private final int d;
 
@@ -18,18 +21,6 @@ public class Sorter {
 
     public List<Job> getJobs() {
         return jobs;
-    }
-
-    public void sort() {
-        ArrayList<Job> jobsByA = new ArrayList<>(jobs);
-        jobsByA.sort(Comparator.comparingInt(Job::getA));
-
-        ArrayList<Job> jobsByB = new ArrayList<>(jobs);
-        jobsByB.sort(Comparator.comparingInt(Job::getB));
-
-        ArrayList<Job> jobsByAB = new ArrayList<>(jobs);
-        jobsByAB.sort(Comparator.comparingInt(j -> j.getA() + j.getB()));
-
     }
 
     public int getResult() {
@@ -47,4 +38,6 @@ public class Sorter {
         }
         return sum;
     }
+
+    public abstract void sort();
 }

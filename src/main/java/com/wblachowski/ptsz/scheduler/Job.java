@@ -8,7 +8,7 @@ public class Job {
     private final int b;
 
     Job(int index, String line) {
-        this.i=index;
+        this.i = index;
         String[] elements = line.trim().split("\\s+");
         p = Integer.parseInt(elements[0]);
         a = Integer.parseInt(elements[1]);

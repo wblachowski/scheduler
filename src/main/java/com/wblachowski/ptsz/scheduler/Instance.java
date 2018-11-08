@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class Instance {
+public class Instance {
 
     private static final String FILE_FORMAT = "sch%d.txt";
 
