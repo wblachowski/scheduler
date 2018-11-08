@@ -1,5 +1,7 @@
 package com.wblachowski.ptsz.scheduler;
 
+import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
+import com.wblachowski.ptsz.scheduler.sorter.HalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.GreedySorter;
 import com.wblachowski.ptsz.scheduler.sorter.Sorter;
 
@@ -15,11 +17,15 @@ public class Application {
         try {
             Instance instance = new Instance(arguments);
             System.out.println(instance.getJobs());
-            Sorter sorter = new GreedySorter(instance);
-            sorter.sort();
             System.out.println(instance.getD());
-            System.out.println(sorter.getJobs());
-            System.out.println(sorter.getResult());
+
+            Sorter[] sorters = new Sorter[]{new GreedySorter(instance), new HalvingSorter(instance), new AdvancedHalvingSorter(instance)};
+            for(Sorter sorter : sorters){
+                System.out.println(sorter.getClass());
+                sorter.sort();
+                System.out.println(sorter.getJobs());
+                System.out.println(sorter.getResult()+"\n");
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
