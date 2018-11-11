@@ -27,6 +27,10 @@ public class Job {
         return b;
     }
 
+    public int getIndex() {
+        return i;
+    }
+
     @Override
     public String toString() {
         return "Job{" +

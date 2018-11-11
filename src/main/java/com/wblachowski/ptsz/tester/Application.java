@@ -11,7 +11,7 @@ public class Application {
         TesterInputArguments arguments = new TesterInputArguments(args);
         Instance instance = new Instance(arguments);
         ProgramRunner runner = new ProgramRunner(arguments.getProgram());
-        System.out.println(Arrays.toString(runner.getOrder()));
-        System.out.println(runner.getResult());
+        Tester tester = new Tester().setInstance(instance).setOrder(runner.getOrder()).setResult(runner.getResult());
+        System.out.println(tester.isCorrect());
     }
 }
