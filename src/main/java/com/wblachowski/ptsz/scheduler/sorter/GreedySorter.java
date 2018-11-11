@@ -1,7 +1,7 @@
 package com.wblachowski.ptsz.scheduler.sorter;
 
-import com.wblachowski.ptsz.scheduler.Instance;
-import com.wblachowski.ptsz.scheduler.Job;
+import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.data.Job;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,9 +37,11 @@ public class GreedySorter extends Sorter {
                     minCostJob = job;
                 }
             }
-            unusedJobs.remove(minCostJob);
-            orderedJobs.add(minCostJob);
-            time += minCostJob.getP();
+            if (minCostJob != null) {
+                unusedJobs.remove(minCostJob);
+                orderedJobs.add(minCostJob);
+                time += minCostJob.getP();
+            }
         }
         setJobs(orderedJobs);
     }

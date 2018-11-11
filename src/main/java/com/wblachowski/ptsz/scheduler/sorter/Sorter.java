@@ -1,12 +1,10 @@
 package com.wblachowski.ptsz.scheduler.sorter;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-import com.wblachowski.ptsz.scheduler.Instance;
-import com.wblachowski.ptsz.scheduler.Job;
+import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.data.Job;
 
 public abstract class Sorter {
 
@@ -14,7 +12,7 @@ public abstract class Sorter {
 
     private List<Job> jobs;
 
-    public Sorter(Instance instance) {
+    Sorter(Instance instance) {
         this.d = instance.getD();
         this.jobs = new ArrayList<>(instance.getJobs());
     }
@@ -23,7 +21,7 @@ public abstract class Sorter {
         return jobs;
     }
 
-    public int getD() {
+    int getD() {
         return d;
     }
 
@@ -45,7 +43,7 @@ public abstract class Sorter {
 
     public abstract void sort();
 
-    protected void setJobs(List<Job> jobs) {
+    void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 }

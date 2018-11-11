@@ -1,7 +1,7 @@
 package com.wblachowski.ptsz.scheduler.sorter;
 
-import com.wblachowski.ptsz.scheduler.Instance;
-import com.wblachowski.ptsz.scheduler.Job;
+import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.data.Job;
 
 import java.util.*;
 import java.util.stream.Collectors;

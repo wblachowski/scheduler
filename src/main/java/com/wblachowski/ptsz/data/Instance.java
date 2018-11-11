@@ -1,4 +1,4 @@
-package com.wblachowski.ptsz.scheduler;
+package com.wblachowski.ptsz.data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,13 +9,13 @@ public class Instance {
 
     private static final String FILE_FORMAT = "sch%d.txt";
 
-    private final InputArguments args;
+    private final InputFileArguments args;
 
     private final ArrayList<Job> jobs;
 
     private final int d;
 
-    Instance(InputArguments args) throws IOException {
+    public Instance(InputFileArguments args) throws IOException {
         this.args = args;
         String filename = String.format(FILE_FORMAT, args.getN());
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {

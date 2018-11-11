@@ -1,6 +1,4 @@
-package com.wblachowski.ptsz.scheduler;
-
-import java.util.Objects;
+package com.wblachowski.ptsz.data;
 
 public class Job {
 
