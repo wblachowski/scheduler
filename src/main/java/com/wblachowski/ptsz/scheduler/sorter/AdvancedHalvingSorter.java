@@ -14,26 +14,39 @@ public class AdvancedHalvingSorter extends Sorter {
     @Override
     public void sort() {
         Set<Job> unusedJobs = new HashSet<>(getJobs());
-        List<Job> jobsSmallerA = getJobs().stream().filter(job -> job.getA() <= job.getB()).collect(Collectors.toList());
-        List<Job> jobsSmallerB = getJobs().stream().filter(job -> job.getA() > job.getB()).collect(Collectors.toList());
+        List<Job> jobsLeft = getJobs().stream().filter(job -> job.getA() <= job.getB()).collect(Collectors.toList());
+        List<Job> jobsRight = getJobs().stream().filter(job -> job.getA() > job.getB()).collect(Collectors.toList());
         /*
         We wont fit all smallerAs before D -> we should transfer some of them to second list...
         */
-        int timeSum = jobsSmallerA.stream().mapToInt(Job::getP).sum();
-        int diff = timeSum - getD();
-        List<Job> jobsSmallerACopy = new ArrayList<>(jobsSmallerA);
-        jobsSmallerACopy.sort(Comparator.comparingInt(Job::getB));
-        while(diff>0){
-            Job job = jobsSmallerACopy.get(0);
-            jobsSmallerB.add(job);
-            jobsSmallerA.remove(job);
-            jobsSmallerACopy.remove(job);
-            timeSum = jobsSmallerA.stream().mapToInt(Job::getP).sum();
-            diff = timeSum - getD();
+        int timeSum = jobsLeft.stream().mapToInt(Job::getP).sum();
+        int diff = getD() - timeSum;
+        int absDiff = Math.abs(diff);
+        List<Job> jobsSourceSorted;
+        List<Job> jobsDestination;
+        List<Job> jobsSource;
+        if (diff < 0) {
+            jobsDestination = jobsRight;
+            jobsSource = jobsLeft;
+            jobsSourceSorted = new ArrayList<>(jobsLeft);
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getA).reversed());
+        } else {
+            jobsDestination = jobsLeft;
+            jobsSource = jobsRight;
+            jobsSourceSorted = new ArrayList<>(jobsRight);
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getB).reversed());
         }
-        jobsSmallerA.sort(Comparator.comparingInt(Job::getA));
-        jobsSmallerB.sort(Comparator.comparingInt(Job::getB).reversed());
-        jobsSmallerA.addAll(jobsSmallerB);
-        setJobs(jobsSmallerA);
+        while (absDiff > 0) {
+            Job job = jobsSourceSorted.get(0);
+            jobsDestination.add(job);
+            jobsSource.remove(job);
+            jobsSourceSorted.remove(job);
+            absDiff -= job.getP();
+        }
+
+        jobsLeft.sort(Comparator.comparingInt(Job::getA));
+        jobsRight.sort(Comparator.comparingInt(Job::getB).reversed());
+        jobsLeft.addAll(jobsRight);
+        setJobs(jobsLeft);
     }
 }
