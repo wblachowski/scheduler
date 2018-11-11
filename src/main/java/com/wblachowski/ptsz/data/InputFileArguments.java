@@ -1,26 +1,20 @@
 package com.wblachowski.ptsz.data;
 
-public class InputFileArguments {
+public abstract class InputFileArguments {
 
-    private final int n;
-    private final int k;
-    private final double h;
+    protected int n;
+    protected int k;
+    protected double h;
 
-    public InputFileArguments(String[] args) {
-        n = Integer.parseInt(args[0]);
-        k = Integer.parseInt(args[1]);
-        h = Double.parseDouble(args[2]);
-    }
-
-    int getN() {
+    int getN(){
         return n;
     }
 
-    int getK() {
+    int getK(){
         return k;
     }
 
-    double getH() {
+    double getH(){
         return h;
     }
 }

@@ -1,7 +1,10 @@
 package com.wblachowski.ptsz.tester;
 
+import com.wblachowski.ptsz.data.InputFileArguments;
+import com.wblachowski.ptsz.tester.data.TesterInputArguments;
+
 public class Application {
     public static void main(String[] args){
-        System.out.println("This is a tester");
+        TesterInputArguments arguments = new TesterInputArguments(args);
     }
 }

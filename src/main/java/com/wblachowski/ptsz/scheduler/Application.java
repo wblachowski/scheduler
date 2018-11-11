@@ -2,6 +2,7 @@ package com.wblachowski.ptsz.scheduler;
 
 import com.wblachowski.ptsz.data.InputFileArguments;
 import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.scheduler.data.SorterInputArguments;
 import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.HalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.GreedySorter;
@@ -15,7 +16,7 @@ public class Application {
     }
 
     private void start(String[] args) {
-        InputFileArguments arguments = new InputFileArguments(args);
+        InputFileArguments arguments = new SorterInputArguments(args);
         try {
             Instance instance = new Instance(arguments);
             System.out.println(instance.getJobs());
