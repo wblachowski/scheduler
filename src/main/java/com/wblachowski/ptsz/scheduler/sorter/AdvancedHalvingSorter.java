@@ -44,8 +44,8 @@ public class AdvancedHalvingSorter extends Sorter {
         }
 //        jobsLeft.sort(Comparator.comparingInt(Job::getA));
 //        jobsRight.sort(Comparator.comparingInt(Job::getB).reversed());
-        jobsLeft.sort(Comparator.comparingInt(job -> ((Job)job).getP() / ((Job)job).getA()).reversed());
-        jobsRight.sort(Comparator.comparingInt(job -> job.getP() / job.getB()));
+        jobsLeft.sort(Comparator.comparingDouble(job -> (double)((Job)job).getP() / (double)((Job)job).getA()).reversed());
+        jobsRight.sort(Comparator.comparingDouble(job -> (double)job.getP() / (double)job.getB()));
         jobsLeft.addAll(jobsRight);
         setJobs(jobsLeft);
     }
