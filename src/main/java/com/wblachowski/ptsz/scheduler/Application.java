@@ -2,6 +2,7 @@ package com.wblachowski.ptsz.scheduler;
 
 import com.wblachowski.ptsz.data.InputFileArguments;
 import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.data.Job;
 import com.wblachowski.ptsz.scheduler.data.SorterInputArguments;
 import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.HalvingSorter;
@@ -27,6 +28,8 @@ public class Application {
                 System.out.println(sorter.getClass());
                 sorter.sort();
                 System.out.println(sorter.getJobs());
+                for(Job job : sorter.getJobs())System.out.print(job.getIndex() + " ");
+                System.out.println();
                 System.out.println(sorter.getResult()+"\n");
             }
         } catch (IOException e) {
