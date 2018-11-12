@@ -30,11 +30,11 @@ public abstract class Sorter {
         int time = 0;
         for (Job job : jobs) {
             int endtime = time + job.getP();
-            int diff = Math.abs(endtime - d);
-            if (endtime < d) {
+            int diff = d - endtime;
+            if (diff > 0) {
                 sum += job.getA() * diff;
-            } else if (endtime > d) {
-                sum += job.getB() * diff;
+            } else {
+                sum += job.getB() * diff * -1;
             }
             time += job.getP();
         }
