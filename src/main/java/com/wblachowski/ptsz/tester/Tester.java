@@ -11,7 +11,26 @@ class Tester {
 
     private Instance instance;
     private int[] order;
-    private int result;
+    private int programResult;
+    private int realResult;
+
+    void test() {
+        int[] positions = getPositions();
+        List<Job> jobs = new ArrayList<>(instance.getJobs());
+        jobs.sort(Comparator.comparingInt(job -> positions[job.getIndex()]));
+        int d = instance.getD();
+        realResult = 0;
+        int time = 0;
+        for (Job job : jobs) {
+            time = time + job.getP();
+            int diff = d - time;
+            if (diff >= 0) {
+                realResult += diff * job.getA();
+            } else {
+                realResult += -1 * diff * job.getB();
+            }
+        }
+    }
 
     Tester setInstance(Instance instance) {
         this.instance = instance;
@@ -23,28 +42,17 @@ class Tester {
         return this;
     }
 
-    Tester setResult(int result) {
-        this.result = result;
+    Tester setProgramResult(int programResult) {
+        this.programResult = programResult;
         return this;
     }
 
     boolean isCorrect() {
-        int[] positions = getPositions();
-        List<Job> jobs = new ArrayList<>(instance.getJobs());
-        jobs.sort(Comparator.comparingInt(job -> positions[job.getIndex()]));
-        int d = instance.getD();
-        int calculatedResult = 0;
-        int time = 0;
-        for (Job job : jobs) {
-            time = time + job.getP();
-            int diff = d - time;
-            if (diff >= 0) {
-                calculatedResult += diff * job.getA();
-            } else {
-                calculatedResult += -1 * diff * job.getB();
-            }
-        }
-        return calculatedResult == result;
+        return realResult == programResult;
+    }
+
+    int getRealResult() {
+        return realResult;
     }
 
     private int[] getPositions() {
