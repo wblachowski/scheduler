@@ -13,7 +13,6 @@ public class AdvancedHalvingSorter extends Sorter {
 
     @Override
     public void sort() {
-        Set<Job> unusedJobs = new HashSet<>(getJobs());
         List<Job> jobsLeft = getJobs().stream().filter(job -> job.getA() <= job.getB()).collect(Collectors.toList());
         List<Job> jobsRight = getJobs().stream().filter(job -> job.getA() > job.getB()).collect(Collectors.toList());
         /*
@@ -29,12 +28,12 @@ public class AdvancedHalvingSorter extends Sorter {
             jobsDestination = jobsRight;
             jobsSource = jobsLeft;
             jobsSourceSorted = new ArrayList<>(jobsLeft);
-            jobsSourceSorted.sort(Comparator.comparingInt(Job::getB)); //getB gives better results for some
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getB));
         } else {
             jobsDestination = jobsLeft;
             jobsSource = jobsRight;
             jobsSourceSorted = new ArrayList<>(jobsRight);
-            jobsSourceSorted.sort(Comparator.comparingInt(Job::getA)); //getA gives better results for some
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getA));
         }
         while (absDiff > 0) {
             Job job = jobsSourceSorted.get(0);
