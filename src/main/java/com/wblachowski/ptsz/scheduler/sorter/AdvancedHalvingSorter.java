@@ -29,12 +29,12 @@ public class AdvancedHalvingSorter extends Sorter {
             jobsDestination = jobsRight;
             jobsSource = jobsLeft;
             jobsSourceSorted = new ArrayList<>(jobsLeft);
-            jobsSourceSorted.sort(Comparator.comparingInt(Job::getA).reversed());
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getA).reversed()); //getB gives better results for some
         } else {
             jobsDestination = jobsLeft;
             jobsSource = jobsRight;
             jobsSourceSorted = new ArrayList<>(jobsRight);
-            jobsSourceSorted.sort(Comparator.comparingInt(Job::getB).reversed());
+            jobsSourceSorted.sort(Comparator.comparingInt(Job::getB).reversed()); //getA gives better results for some
         }
         while (absDiff > 0) {
             Job job = jobsSourceSorted.get(0);
