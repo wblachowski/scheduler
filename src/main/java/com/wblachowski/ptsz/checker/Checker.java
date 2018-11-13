@@ -15,15 +15,13 @@ public class Checker {
         for (int fileNumber : filesNumbers) {
             for (int k = 1; k <= 10; k++) {
                 int[] results = resultReader.getResults(fileNumber, k);
-                int j = 0;
-                for (double h = 0.2; h <= 0.8; h += 0.2) {
+                for (int h = 4; h <= 6; h +=2) {
                     String[] schedulerArgs = new String[]{String.valueOf(fileNumber), String.valueOf(k), String.valueOf(h)};
                     Scheduler scheduler = new Scheduler(schedulerArgs);
                     scheduler.start();
-                    int optimalResult = results[j];
-                    System.out.print(String.format("\"%d %d %.1f\": ", fileNumber, k, h));
+                    int optimalResult = results[h/2 - 1];
+                    System.out.print(String.format("\"%d %d %.1f\": ", fileNumber, k, (double)h/10));
                     System.out.println(scheduler.getResult() / (double) optimalResult);
-                    j++;
                     problemsCount++;
                     sum += scheduler.getResult() / (double) optimalResult;
                 }
