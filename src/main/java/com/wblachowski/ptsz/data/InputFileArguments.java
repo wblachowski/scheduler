@@ -12,15 +12,19 @@ public class InputFileArguments {
         h = Integer.parseInt(args[2]);
     }
 
-    int getN(){
+    public int getN(){
         return n;
     }
 
-    int getK(){
+    public int getK(){
         return k;
     }
 
-    double getH(){
+    public double getH(){
         return (double)h/10;
+    }
+
+    public int getHinteger(){
+        return h;
     }
 }
