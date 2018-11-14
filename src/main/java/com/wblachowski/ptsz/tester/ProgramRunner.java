@@ -1,8 +1,10 @@
 package com.wblachowski.ptsz.tester;
 
+import com.wblachowski.ptsz.tester.data.TesterInputArguments;
+
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 
 class ProgramRunner {
@@ -11,14 +13,17 @@ class ProgramRunner {
     private final int result;
     private final long executionTimeMillis;
 
-    ProgramRunner(String program) throws IOException, InterruptedException {
+    ProgramRunner(TesterInputArguments arguments) throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
-        Process p = Runtime.getRuntime().exec(program);
+        Process p = Runtime.getRuntime().exec(arguments.getProgram());
         executionTimeMillis = System.currentTimeMillis() - start;
+        String index = arguments.getProgram().split("\\.")[0];
+        String filename = "sch_" + index + "_" + arguments.getN() + "_" + arguments.getK() + "_" + arguments.getHinteger() + ".out";
+
         BufferedReader bri = new BufferedReader
-                (new InputStreamReader(p.getInputStream()));
-        order = Arrays.stream(bri.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+                (new FileReader(filename));
         result = Integer.parseInt(bri.readLine().trim());
+        order = Arrays.stream(bri.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         bri.close();
         p.waitFor();
     }
