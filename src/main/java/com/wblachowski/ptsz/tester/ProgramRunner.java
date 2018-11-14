@@ -11,12 +11,12 @@ class ProgramRunner {
 
     private final int[] order;
     private final int result;
-    private final long executionTimeMillis;
+    private final double executionTime;
 
     ProgramRunner(TesterInputArguments arguments) throws IOException, InterruptedException {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         Process p = Runtime.getRuntime().exec(arguments.getProgram());
-        executionTimeMillis = System.currentTimeMillis() - start;
+        executionTime =(double)( System.nanoTime() - start)/1000000f;
         String index = arguments.getProgram().split("\\.")[0];
         String filename = "sch_" + index + "_" + arguments.getN() + "_" + arguments.getK() + "_" + arguments.getHinteger() + ".out";
 
@@ -36,8 +36,10 @@ class ProgramRunner {
         return result;
     }
 
-    long getExecutionTimeMillis() {
-        return executionTimeMillis;
+    double getExecutionTime() {
+        return executionTime;
     }
+
+
 
 }

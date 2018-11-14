@@ -12,6 +12,6 @@ public class Application {
         ProgramRunner runner = new ProgramRunner(arguments);
         Tester tester = new Tester().setInstance(instance).setOrder(runner.getOrder()).setProgramResult(runner.getResult());
         tester.test();
-        System.out.println(tester.isCorrect() + "\n" + tester.getRealResult() + "\n" + runner.getExecutionTimeMillis());
+        System.out.println(tester.isCorrect() + "\n" + tester.getRealResult() + "\n" + runner.getExecutionTime());
     }
 }
