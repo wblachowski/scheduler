@@ -13,9 +13,8 @@ public class Scheduler {
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(args);
         scheduler.start();
-        for (Job job : scheduler.getJobs()) System.out.print(job.getIndex() + " ");
-        System.out.println();
         System.out.println(scheduler.getResult());
+        for (Job job : scheduler.getJobs()) System.out.print(job.getIndex() + " ");
     }
 
     private List<Job> jobs;
