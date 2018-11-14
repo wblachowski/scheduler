@@ -15,7 +15,7 @@ public class Checker {
         for (int fileNumber : filesNumbers) {
             for (int k = 1; k <= 10; k++) {
                 int[] results = resultReader.getResults(fileNumber, k);
-                for (int h = 8; h <= 8; h +=2) {
+                for (int h = 2; h <= 8; h +=2) {
                     String[] schedulerArgs = new String[]{String.valueOf(fileNumber), String.valueOf(k), String.valueOf(h)};
                     Scheduler scheduler = new Scheduler(schedulerArgs);
                     scheduler.start();

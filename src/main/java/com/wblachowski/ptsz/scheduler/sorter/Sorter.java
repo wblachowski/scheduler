@@ -29,14 +29,13 @@ public abstract class Sorter {
         int sum = 0;
         int time = 0;
         for (Job job : jobs) {
-            int endtime = time + job.getP();
-            int diff = d - endtime;
+            time += job.getP();
+            int diff = d - time;
             if (diff > 0) {
                 sum += job.getA() * diff;
             } else {
                 sum += job.getB() * diff * -1;
             }
-            time += job.getP();
         }
         return sum;
     }

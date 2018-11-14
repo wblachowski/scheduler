@@ -24,7 +24,7 @@ class Tester {
         for (Job job : jobs) {
             time = time + job.getP();
             int diff = d - time;
-            if (diff >= 0) {
+            if (diff > 0) {
                 realResult += diff * job.getA();
             } else {
                 realResult += -1 * diff * job.getB();
