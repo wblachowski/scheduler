@@ -15,8 +15,10 @@ class ProgramRunner {
 
     ProgramRunner(TesterInputArguments arguments) throws IOException, InterruptedException {
         long start = System.nanoTime();
-        Process p = Runtime.getRuntime().exec(arguments.getProgram());
+        String executionPath = arguments.getProgram()+" "+arguments.getN()+" "+arguments.getK()+" "+arguments.getHinteger();
+        Process p = Runtime.getRuntime().exec(executionPath);
         executionTime =(double)( System.nanoTime() - start)/1000000f;
+        Thread.sleep(1000);
         String index = arguments.getProgram().split("\\.")[0];
         String filename = "sch_" + index + "_" + arguments.getN() + "_" + arguments.getK() + "_" + arguments.getHinteger() + ".out";
 
