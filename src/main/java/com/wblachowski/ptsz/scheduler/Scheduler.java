@@ -55,7 +55,7 @@ public class Scheduler {
     }
 
     private void saveToFile() throws IOException {
-        String filename="sch_127259_"+arguments.getN()+"_"+arguments.getK()+"_"+arguments.getHinteger()+".out";
+        String filename="sch_127259_"+arguments.getN()+"_"+arguments.getK()+"_"+(int)(10*arguments.getH())+".out";
         File outputfile = new File(filename);
         outputfile.createNewFile();
         try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {

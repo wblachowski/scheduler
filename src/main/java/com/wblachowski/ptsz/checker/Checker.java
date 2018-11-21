@@ -14,7 +14,7 @@ public class Checker {
         double sum = 0;
         int problemsCount = 0;
         ResultReader resultReader = new ResultReader();
-        Scheduler schedulerWarmup = new Scheduler(new String[]{"20","2","2"});
+        Scheduler schedulerWarmup = new Scheduler(new String[]{"20","2","0.2"});
         schedulerWarmup.start();
         double minError=Double.MAX_VALUE;
         double maxError=Double.MIN_VALUE;
@@ -25,7 +25,7 @@ public class Checker {
                 int[] results = resultReader.getResults(fileNumber, k);
                 for (int h = 4; h <= 6; h +=2) {
                     problemsCount++;
-                    String[] schedulerArgs = new String[]{String.valueOf(fileNumber), String.valueOf(k), String.valueOf(h)};
+                    String[] schedulerArgs = new String[]{String.valueOf(fileNumber), String.valueOf(k), String.valueOf((double)h/10)};
                     Scheduler scheduler = new Scheduler(schedulerArgs);
                     long startmillis = System.nanoTime();
                     scheduler.start();

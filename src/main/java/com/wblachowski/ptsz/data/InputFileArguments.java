@@ -4,12 +4,12 @@ public class InputFileArguments {
 
     private int n;
     private int k;
-    private int h;
+    private double h;
 
     public InputFileArguments(String[] args){
         n = Integer.parseInt(args[0]);
         k = Integer.parseInt(args[1]);
-        h = Integer.parseInt(args[2]);
+        h = Double.parseDouble(args[2]);
     }
 
     public int getN(){
@@ -21,10 +21,6 @@ public class InputFileArguments {
     }
 
     public double getH(){
-        return (double)h/10;
-    }
-
-    public int getHinteger(){
         return h;
     }
 }
