@@ -5,6 +5,7 @@ import com.wblachowski.ptsz.data.Instance;
 import com.wblachowski.ptsz.data.Job;
 import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.Sorter;
+import com.wblachowski.ptsz.scheduler.sorter.genetic.GeneticSorter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,10 +34,8 @@ public class Scheduler {
         arguments = new InputFileArguments(args);
         try {
             Instance instance = new Instance(arguments);
-//            System.out.println(instance.getJobs());
-//            System.out.println(instance.getD());
 
-            Sorter sorter = new AdvancedHalvingSorter(instance);
+            Sorter sorter = new GeneticSorter(instance);
             sorter.sort();
             jobs = sorter.getJobs();
             result = sorter.getResult();

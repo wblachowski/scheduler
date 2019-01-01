@@ -12,7 +12,7 @@ public abstract class Sorter {
 
     private List<Job> jobs;
 
-    Sorter(Instance instance) {
+    public Sorter(Instance instance) {
         this.d = instance.getD();
         this.jobs = new ArrayList<>(instance.getJobs());
     }
