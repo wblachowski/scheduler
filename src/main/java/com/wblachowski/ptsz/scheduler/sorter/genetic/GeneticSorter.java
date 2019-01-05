@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class GeneticSorter extends Sorter {
     private static final int POPULATION_SIZE = 200;
+    private static final double MUTATION_PROBABILITY = 0.1;
     private Random random = new Random();
 
     public GeneticSorter(Instance instance) {
@@ -19,13 +20,16 @@ public class GeneticSorter extends Sorter {
     @Override
     public void sort() {
         Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
-        for (int j = 0; j < 20; j++) {
+        for (int j = 0; j < 200; j++) {
             List<Solution> breedingSolutions = parentPopulation.getSolutionsForBreeding();
             List<Solution> childrenSolutions = new ArrayList<>();
             for (int i = 0; i < POPULATION_SIZE; i++) {
                 Solution firstParent = breedingSolutions.get(random.nextInt(breedingSolutions.size()));
                 Solution secondParent = breedingSolutions.get(random.nextInt(breedingSolutions.size()));
                 Solution child = firstParent.getChild(secondParent);
+                if (random.nextDouble() <= MUTATION_PROBABILITY) {
+                    child.mutate();
+                }
                 childrenSolutions.add(child);
             }
             Population childrenPopulation = new Population(childrenSolutions);

@@ -2,10 +2,7 @@ package com.wblachowski.ptsz.scheduler.sorter.genetic;
 
 import com.wblachowski.ptsz.data.Job;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class Solution {
@@ -48,14 +45,27 @@ class Solution {
         return new Solution(childJobs, dueDate);
     }
 
-    private void removeDuplicates(List<Job> childrenJobs){
-        LinkedList<Job> unusedJobs = jobs.stream().filter(j->!childrenJobs.contains(j)).collect(Collectors.toCollection(LinkedList::new));
-        for(int i=0;i<childrenJobs.size();i++){
+    void mutate() {
+        int lastJobBeforeDueDate = 0;
+        int time = 0;
+        while (time <= dueDate) {
+            time += jobs.get(lastJobBeforeDueDate++).getP();
+        }
+        lastJobBeforeDueDate--;
+        Random random = new Random();
+        int jobBefore = random.nextInt(lastJobBeforeDueDate + 1);
+        int jobAfter = random.nextInt(jobs.size() - lastJobBeforeDueDate) + lastJobBeforeDueDate;
+        Collections.swap(jobs, jobBefore, jobAfter);
+    }
+
+    private void removeDuplicates(List<Job> childrenJobs) {
+        LinkedList<Job> unusedJobs = jobs.stream().filter(j -> !childrenJobs.contains(j)).collect(Collectors.toCollection(LinkedList::new));
+        for (int i = 0; i < childrenJobs.size(); i++) {
             Job job = childrenJobs.get(i);
-            if(childrenJobs.subList(0,i).contains(job)){
+            if (childrenJobs.subList(0, i).contains(job)) {
                 Job substitute = unusedJobs.getFirst();
                 unusedJobs.removeFirst();
-                childrenJobs.set(i,substitute);
+                childrenJobs.set(i, substitute);
             }
         }
     }
