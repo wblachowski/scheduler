@@ -1,25 +1,32 @@
 package com.wblachowski.ptsz.scheduler.sorter.genetic;
 
 import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.Sorter;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GeneticSorter extends Sorter {
     private static final int POPULATION_SIZE = 200;
     private static final double MUTATION_PROBABILITY = 0.1;
     private Random random = new Random();
 
+    AdvancedHalvingSorter sorter;
+
     public GeneticSorter(Instance instance) {
         super(instance);
+        sorter = new AdvancedHalvingSorter(instance);
     }
 
     @Override
     public void sort() {
-        Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
+
+        //INPUT FROM GREEDY SORTER
+        sorter.sort();
+        Population parentPopulation = new Population(new ArrayList<>(Collections.nCopies(POPULATION_SIZE, new Solution(sorter.getJobs(), getD()))));
+
+        //OR RANDOM INPUT
+        //Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
         for (int j = 0; j < 200; j++) {
             List<Solution> breedingSolutions = parentPopulation.getSolutionsForBreeding();
             List<Solution> childrenSolutions = new ArrayList<>();
@@ -33,7 +40,7 @@ public class GeneticSorter extends Sorter {
                 childrenSolutions.add(child);
             }
             Population childrenPopulation = new Population(childrenSolutions);
-            System.out.printf("Avg: %.2f Best: %d\n", childrenSolutions.stream().mapToInt(Solution::getFitness).average().orElse(Double.MAX_VALUE), childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE));
+            //System.out.printf("Avg: %.2f Best: %d\n", childrenSolutions.stream().mapToInt(Solution::getFitness).average().orElse(Double.MAX_VALUE), childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE));
             parentPopulation = childrenPopulation;
         }
         setJobs(parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs());
