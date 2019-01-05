@@ -16,7 +16,7 @@ class Solution {
     Solution(List<Job> jobs, int dueDate) {
         this.jobs = new ArrayList<>(jobs);
         this.dueDate = dueDate;
-        this.crossoverPoints = Arrays.stream(CROSSOVER_PERCENTAGES).boxed().map(p->(int)(p*jobs.size())).collect(Collectors.toList());
+        this.crossoverPoints = Arrays.stream(CROSSOVER_PERCENTAGES).boxed().map(p -> (int) (p * jobs.size())).collect(Collectors.toList());
     }
 
     List<Job> getJobs() {
@@ -37,12 +37,12 @@ class Solution {
     Solution getChild(Solution secondParent) {
         List<Job> childJobs = new ArrayList<>();
         Solution source = this;
-        for(int i=0; i<jobs.size();i++){
-            if(crossoverPoints.contains(i)){
+        for (int i = 0; i < jobs.size(); i++) {
+            if (crossoverPoints.contains(i)) {
                 source = source == this ? secondParent : this;
             }
             childJobs.add(source.getJobs().get(i));
         }
-        return new Solution(childJobs,dueDate);
+        return new Solution(childJobs, dueDate);
     }
 }

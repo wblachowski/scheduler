@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-import java.util.function.DoubleSupplier;
 
 public class GeneticSorter extends Sorter {
     private static final int POPULATION_SIZE = 200;
@@ -20,7 +19,7 @@ public class GeneticSorter extends Sorter {
     @Override
     public void sort() {
         Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
-        for(int j=0;j<20;j++) {
+        for (int j = 0; j < 20; j++) {
             List<Solution> breedingSolutions = parentPopulation.getSolutionsForBreeding();
             List<Solution> childrenSolutions = new ArrayList<>();
             for (int i = 0; i < POPULATION_SIZE; i++) {

@@ -3,7 +3,6 @@ package com.wblachowski.ptsz.scheduler;
 import com.wblachowski.ptsz.data.InputFileArguments;
 import com.wblachowski.ptsz.data.Instance;
 import com.wblachowski.ptsz.data.Job;
-import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.Sorter;
 import com.wblachowski.ptsz.scheduler.sorter.genetic.GeneticSorter;
 
@@ -45,7 +44,7 @@ public class Scheduler {
         }
     }
 
-    public List<Job> getJobs() {
+    List<Job> getJobs() {
         return jobs;
     }
 
@@ -54,12 +53,12 @@ public class Scheduler {
     }
 
     private void saveToFile() throws IOException {
-        String filename="sch_127259_"+arguments.getN()+"_"+arguments.getK()+"_"+(int)(10*arguments.getH())+".out";
+        String filename = "sch_127259_" + arguments.getN() + "_" + arguments.getK() + "_" + (int) (10 * arguments.getH()) + ".out";
         File outputfile = new File(filename);
         outputfile.createNewFile();
         try (PrintStream out = new PrintStream(new FileOutputStream(filename))) {
-            out.print(getResult()+"\n");
-            jobs.forEach(job->out.print(job.getIndex()+" "));
+            out.print(getResult() + "\n");
+            jobs.forEach(job -> out.print(job.getIndex() + " "));
         }
     }
 }
