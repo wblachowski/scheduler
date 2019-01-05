@@ -14,5 +14,8 @@ public class GeneticSorter extends Sorter {
     @Override
     public void sort() {
         population = new Population(POPULATION_SIZE, getJobs(), getD());
+        for(Solution solution : population.getSolutionsForBreeding()){
+            System.out.println(solution.getFitness());
+        }
     }
 }
