@@ -9,7 +9,7 @@ class Population {
 
     private static final double SELECTION_FACTOR=0.5;
 
-    private Set<Solution> solutions = new LinkedHashSet<>();
+    private List<Solution> solutions = new ArrayList<>();
 
     Population(int size, List<Job> jobs, int dueDate) {
         List<Job> allJobs = new ArrayList<>(jobs);
@@ -19,12 +19,16 @@ class Population {
         }
     }
 
-    public Set<Solution> getSolutions() {
+    Population(List<Solution> solutions){
+        this.solutions=solutions;
+    }
+
+    List<Solution> getSolutions() {
         return solutions;
     }
 
-    public Set<Solution> getSolutionsForBreeding(){
+    List<Solution> getSolutionsForBreeding(){
         int breedingSetSize = (int) (solutions.size()*SELECTION_FACTOR);
-        return solutions.stream().sorted(Comparator.comparingInt(Solution::getFitness)).limit(breedingSetSize).collect(Collectors.toCollection(LinkedHashSet::new));
+        return solutions.stream().sorted(Comparator.comparingInt(Solution::getFitness)).limit(breedingSetSize).collect(Collectors.toList());
     }
 }

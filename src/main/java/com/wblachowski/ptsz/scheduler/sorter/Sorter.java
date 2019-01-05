@@ -42,7 +42,7 @@ public abstract class Sorter {
 
     public abstract void sort();
 
-    void setJobs(List<Job> jobs) {
+    protected void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 }
