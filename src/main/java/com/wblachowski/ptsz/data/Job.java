@@ -1,5 +1,7 @@
 package com.wblachowski.ptsz.data;
 
+import java.util.Objects;
+
 public class Job {
 
     private final int i;
@@ -39,5 +41,21 @@ public class Job {
                 ", a=" + a +
                 ", b=" + b +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return i == job.i &&
+                p == job.p &&
+                a == job.a &&
+                b == job.b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(i, p, a, b);
     }
 }

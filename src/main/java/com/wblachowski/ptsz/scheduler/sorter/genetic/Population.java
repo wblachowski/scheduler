@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 class Population {
 
-    private static final double SELECTION_FACTOR = 0.5;
+    private static final double SELECTION_FACTOR = 0.25;
 
     private List<Solution> solutions = new ArrayList<>();
 

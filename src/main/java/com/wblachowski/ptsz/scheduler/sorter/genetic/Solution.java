@@ -4,6 +4,7 @@ import com.wblachowski.ptsz.data.Job;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,20 @@ class Solution {
             }
             childJobs.add(source.getJobs().get(i));
         }
+        removeDuplicates(childJobs);
         return new Solution(childJobs, dueDate);
+    }
+
+    private void removeDuplicates(List<Job> childrenJobs){
+        LinkedList<Job> unusedJobs = new LinkedList<>(jobs);
+        unusedJobs = unusedJobs.stream().filter(j->!childrenJobs.contains(j)).collect(Collectors.toCollection(LinkedList::new));
+        for(int i=0;i<childrenJobs.size();i++){
+            Job job = childrenJobs.get(i);
+            if(childrenJobs.subList(0,i).contains(job)){
+                Job substitute = unusedJobs.getFirst();
+                unusedJobs.removeFirst();
+                childrenJobs.set(i,substitute);
+            }
+        }
     }
 }
