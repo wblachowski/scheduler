@@ -49,8 +49,7 @@ class Solution {
     }
 
     private void removeDuplicates(List<Job> childrenJobs){
-        LinkedList<Job> unusedJobs = new LinkedList<>(jobs);
-        unusedJobs = unusedJobs.stream().filter(j->!childrenJobs.contains(j)).collect(Collectors.toCollection(LinkedList::new));
+        LinkedList<Job> unusedJobs = jobs.stream().filter(j->!childrenJobs.contains(j)).collect(Collectors.toCollection(LinkedList::new));
         for(int i=0;i<childrenJobs.size();i++){
             Job job = childrenJobs.get(i);
             if(childrenJobs.subList(0,i).contains(job)){
