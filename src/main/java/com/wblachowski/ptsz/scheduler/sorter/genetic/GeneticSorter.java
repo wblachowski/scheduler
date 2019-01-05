@@ -30,7 +30,7 @@ public class GeneticSorter extends Sorter {
                 childrenSolutions.add(child);
             }
             Population childrenPopulation = new Population(childrenSolutions);
-            System.out.printf("Average: %f Best %d:\n", childrenSolutions.stream().mapToInt(Solution::getFitness).average().orElse(Double.MAX_VALUE), childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE));
+            System.out.printf("Avg: %.2f Best: %d\n", childrenSolutions.stream().mapToInt(Solution::getFitness).average().orElse(Double.MAX_VALUE), childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE));
             parentPopulation = childrenPopulation;
         }
         setJobs(parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs());
