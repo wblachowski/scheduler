@@ -13,6 +13,6 @@ public class GeneticSorter extends Sorter {
 
     @Override
     public void sort() {
-        population = new Population(POPULATION_SIZE, getJobs());
+        population = new Population(POPULATION_SIZE, getJobs(), getD());
     }
 }

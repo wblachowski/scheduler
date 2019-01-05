@@ -21,7 +21,7 @@ public abstract class Sorter {
         return jobs;
     }
 
-    int getD() {
+    protected int getD() {
         return d;
     }
 

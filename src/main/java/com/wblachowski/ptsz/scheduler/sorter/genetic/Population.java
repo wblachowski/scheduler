@@ -8,11 +8,11 @@ class Population {
 
     private Set<Solution> solutions = new HashSet<>();
 
-    Population(int size, List<Job> jobs) {
+    Population(int size, List<Job> jobs, int dueDate) {
         List<Job> allJobs = new ArrayList<>(jobs);
         for (int i = 0; i < size; i++) {
             Collections.shuffle(allJobs);
-            solutions.add(new Solution(allJobs));
+            solutions.add(new Solution(allJobs, dueDate));
         }
     }
 
