@@ -55,7 +55,7 @@ public class GeneticSorter extends Sorter {
             parentPopulation = childrenPopulation;
             iterations++;
         }
-        System.out.printf("Iterations: %d", iterations);
+        System.out.printf("Iterations: %d\n", iterations);
         setJobs(parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs());
     }
 }
