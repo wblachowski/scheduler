@@ -8,14 +8,22 @@ import java.util.*;
 
 public class GeneticSorter extends Sorter {
     private static final int POPULATION_SIZE = 200;
-    private static final double MUTATION_PROBABILITY = 0.1;
+    private static final  double MUTATION_PROBABILITY = 0.1;
+    private final AdvancedHalvingSorter sorter;
     private Random random = new Random();
-
-    AdvancedHalvingSorter sorter;
+    private long millisLimit;
+    private long millisStart;
 
     public GeneticSorter(Instance instance) {
         super(instance);
         sorter = new AdvancedHalvingSorter(instance);
+    }
+
+    @Override
+    public void sort(long millisLimit) {
+        this.millisLimit = millisLimit;
+        this.millisStart = System.currentTimeMillis();
+        sort();
     }
 
     @Override
@@ -27,7 +35,9 @@ public class GeneticSorter extends Sorter {
 
         //OR RANDOM INPUT
         //Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
-        for (int j = 0; j < 200; j++) {
+
+        int iterations = 0;
+        while (System.currentTimeMillis() - millisStart < millisLimit) {
             List<Solution> breedingSolutions = parentPopulation.getSolutionsForBreeding();
             List<Solution> childrenSolutions = new ArrayList<>();
             for (int i = 0; i < POPULATION_SIZE; i++) {
@@ -40,9 +50,12 @@ public class GeneticSorter extends Sorter {
                 childrenSolutions.add(child);
             }
             Population childrenPopulation = new Population(childrenSolutions);
-            //System.out.printf("Avg: %.2f Best: %d\n", childrenSolutions.stream().mapToInt(Solution::getFitness).average().orElse(Double.MAX_VALUE), childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE));
+            int best = childrenSolutions.stream().mapToInt(Solution::getFitness).min().orElse(Integer.MAX_VALUE);
+            System.out.printf("Best: %d\n", best);
             parentPopulation = childrenPopulation;
+            iterations++;
         }
+        System.out.printf("Iterations: %d", iterations);
         setJobs(parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs());
     }
 }

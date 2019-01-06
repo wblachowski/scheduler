@@ -14,6 +14,9 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class Scheduler {
+
+    private static final int MILLIS_FILE_SAVE_DURATION = 15;
+
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(args, "greedy");
         scheduler.start();
@@ -31,15 +34,17 @@ public class Scheduler {
     private List<Job> jobs;
     private int result;
     private final String[] args;
+    private long millisStart;
     private String sorterType;
     private InputFileArguments arguments;
 
     public Scheduler(String[] args) {
         this.args = args;
+        this.millisStart = System.currentTimeMillis();
     }
 
     public Scheduler(String[] args, String sorterType) {
-        this.args = args;
+        this(args);
         this.sorterType = sorterType;
     }
 
@@ -47,9 +52,9 @@ public class Scheduler {
         arguments = new InputFileArguments(args);
         try {
             Instance instance = new Instance(arguments);
-
             Sorter sorter = "genetic".equals(sorterType) ? new GeneticSorter(instance) : new AdvancedHalvingSorter(instance);
-            sorter.sort();
+            long millisLimit = calcMillisLimit(instance);
+            sorter.sort(millisLimit);
             jobs = sorter.getJobs();
             result = sorter.getResult();
             saveToFile();
@@ -74,5 +79,12 @@ public class Scheduler {
             out.print(getResult() + "\n");
             jobs.forEach(job -> out.print(job.getIndex() + " "));
         }
+    }
+
+    private long calcMillisLimit(Instance instance) {
+        int n = instance.getJobs().size();
+        long totalTime = n*100;
+        long timePassed = System.currentTimeMillis() - millisStart;
+        return totalTime - timePassed - MILLIS_FILE_SAVE_DURATION;
     }
 }

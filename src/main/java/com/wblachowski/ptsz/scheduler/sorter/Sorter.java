@@ -40,6 +40,10 @@ public abstract class Sorter {
         return sum;
     }
 
+    public void sort(long millisLimit){
+        sort();
+    }
+
     public abstract void sort();
 
     protected void setJobs(List<Job> jobs) {

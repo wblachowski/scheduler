@@ -26,7 +26,7 @@ public class Checker {
                 for (int h = 4; h <= 6; h +=2) {
                     problemsCount++;
                     String[] schedulerArgs = new String[]{String.valueOf(fileNumber), String.valueOf(k), String.valueOf((double)h/10)};
-                    Scheduler scheduler = new Scheduler(schedulerArgs);
+                    Scheduler scheduler = new Scheduler(schedulerArgs,"genetic");
                     long startmillis = System.nanoTime();
                     scheduler.start();
                     long executingTime = System.nanoTime() - startmillis;
