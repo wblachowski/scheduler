@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Scheduler {
 
-    private static final int MILLIS_FILE_SAVE_DURATION = 20;
+    private static final int MILLIS_FILE_SAVE_DURATION = 50;
 
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(args, "greedy");
@@ -80,7 +80,7 @@ public class Scheduler {
             out.print(getResult() + "\n");
             jobs.forEach(job -> out.print(job.getIndex() + " "));
         }
-        System.out.printf("SAVING FILE TOOK: %d", System.currentTimeMillis()-start);
+        System.out.printf("SAVING FILE TOOK: %d\n", System.currentTimeMillis()-start);
     }
 
     private long calcMillisLimit(Instance instance) {

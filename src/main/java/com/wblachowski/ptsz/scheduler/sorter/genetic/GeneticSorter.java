@@ -1,6 +1,7 @@
 package com.wblachowski.ptsz.scheduler.sorter.genetic;
 
 import com.wblachowski.ptsz.data.Instance;
+import com.wblachowski.ptsz.data.Job;
 import com.wblachowski.ptsz.scheduler.sorter.AdvancedHalvingSorter;
 import com.wblachowski.ptsz.scheduler.sorter.Sorter;
 
@@ -8,7 +9,7 @@ import java.util.*;
 
 public class GeneticSorter extends Sorter {
     private static final int POPULATION_SIZE = 100;
-    private static final  double MUTATION_PROBABILITY = 0.1;
+    private static final double MUTATION_PROBABILITY = 0.1;
     private final AdvancedHalvingSorter sorter;
     private Random random = new Random();
     private long millisLimit;
@@ -28,16 +29,15 @@ public class GeneticSorter extends Sorter {
 
     @Override
     public void sort() {
-
+        long shuffleStart = System.currentTimeMillis();
         //INPUT FROM GREEDY SORTER
         sorter.sort();
         Population parentPopulation = new Population(new ArrayList<>(Collections.nCopies(POPULATION_SIZE, new Solution(sorter.getJobs(), getD()))));
 
-        //OR RANDOM INPUT
-        //Population parentPopulation = new Population(POPULATION_SIZE, getJobs(), getD());
+        long shuffleTime = System.currentTimeMillis() - shuffleStart;
 
         int iterations = 0;
-        while (System.currentTimeMillis() - millisStart < millisLimit) {
+        while (System.currentTimeMillis() - millisStart - 2 * shuffleTime < millisLimit) {
             List<Solution> breedingSolutions = parentPopulation.getSolutionsForBreeding();
             List<Solution> childrenSolutions = new ArrayList<>();
             for (int i = 0; i < POPULATION_SIZE; i++) {
@@ -56,6 +56,8 @@ public class GeneticSorter extends Sorter {
             iterations++;
         }
         System.out.printf("Iterations: %d\n", iterations);
-        setJobs(parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs());
+        List<Job> jobs = parentPopulation.getSolutions().stream().min(Comparator.comparingInt(Solution::getFitness)).get().getJobs();
+        doBubbleSwapping(jobs);
+        setJobs(jobs);
     }
 }
