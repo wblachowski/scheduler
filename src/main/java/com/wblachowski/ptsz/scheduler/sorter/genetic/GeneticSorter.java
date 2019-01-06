@@ -7,7 +7,7 @@ import com.wblachowski.ptsz.scheduler.sorter.Sorter;
 import java.util.*;
 
 public class GeneticSorter extends Sorter {
-    private static final int POPULATION_SIZE = 200;
+    private static final int POPULATION_SIZE = 100;
     private static final  double MUTATION_PROBABILITY = 0.1;
     private final AdvancedHalvingSorter sorter;
     private Random random = new Random();
