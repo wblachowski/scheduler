@@ -37,7 +37,7 @@ public class Checker {
                     if(error>maxError)maxError=error;
                     if(error<minError)minError=error;
 //                    System.out.print(String.format("\"%d %d %.1f\": ", fileNumber, k, (double)h/10));
-                    System.out.println(String.format("%d & %d & %d & %.1f & %d & %d & %.2f\\%% & %.3f \\\\\n\\hline", problemsCount, fileNumber, k, (double)h/10, optimalResult, scheduler.getResult(),error,(double)executingTime/1000000f));
+                    System.out.println(String.format("%d & %d & %d & %.1f & %d & %d & %.2f\\%% & & & %.3f \\\\\n\\hline", problemsCount, fileNumber, k, (double)h/10, optimalResult, scheduler.getResult(),error,(double)executingTime/1000000000f));
                     sum += scheduler.getResult() / (double) optimalResult;
                 }
             }

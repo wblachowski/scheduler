@@ -80,13 +80,14 @@ public class Scheduler {
             out.print(getResult() + "\n");
             jobs.forEach(job -> out.print(job.getIndex() + " "));
         }
-        System.out.printf("SAVING FILE TOOK: %d\n", System.currentTimeMillis()-start);
+        //System.out.printf("SAVING FILE TOOK: %d\n", System.currentTimeMillis()-start);
     }
 
     private long calcMillisLimit(Instance instance) {
         int n = instance.getJobs().size();
         long totalTime = n*100;
         long timePassed = System.currentTimeMillis() - millisStart;
-        return totalTime - timePassed - MILLIS_FILE_SAVE_DURATION;
+        long saveTime = n>=500 ? 5*MILLIS_FILE_SAVE_DURATION : MILLIS_FILE_SAVE_DURATION;
+        return totalTime - timePassed - saveTime;
     }
 }
