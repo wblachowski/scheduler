@@ -32,7 +32,7 @@ public class Application {
                     double error = 100 * (double) (runner.getResult() - optimalResult) / (double) optimalResult;
                     errorSum += error;
                     timeSum += runner.getExecutionTime();
-                    System.out.printf("Correct: %s\nProgram result: %d\nReal result: %d\nOptimal result: d\nError: %f\nTime: %f\n", tester.isCorrect(), runner.getResult(), tester.getRealResult(), optimalResult, error, runner.getExecutionTime());
+                    System.out.printf("Correct: %s\nProgram result: %d\nReal result: %d\nOptimal result: %d\nError: %f\nTime: %f\n", tester.isCorrect(), runner.getResult(), tester.getRealResult(), optimalResult, error, runner.getExecutionTime());
                 }
             }
         }
