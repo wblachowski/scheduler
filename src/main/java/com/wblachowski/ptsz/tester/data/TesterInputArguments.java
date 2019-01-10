@@ -14,4 +14,9 @@ public class TesterInputArguments extends InputFileArguments {
     public String getProgram() {
         return program;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d %d %.1f", getN(),getK(),getH());
+    }
 }

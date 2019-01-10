@@ -14,11 +14,10 @@ class ProgramRunner {
     private final double executionTime;
 
     ProgramRunner(TesterInputArguments arguments) throws IOException, InterruptedException {
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         String executionPath = arguments.getProgram()+" "+arguments.getN()+" "+arguments.getK()+" "+arguments.getH();
-        Process p = Runtime.getRuntime().exec(executionPath);
-        executionTime =(double)( System.nanoTime() - start)/1000000f;
-        Thread.sleep(1000);
+        int p = Runtime.getRuntime().exec(executionPath).waitFor();
+        executionTime =(double)( System.currentTimeMillis() - start)/1000f;
         String index = arguments.getProgram().split("\\.")[0];
         String filename = "sch_" + index + "_" + arguments.getN() + "_" + arguments.getK() + "_" + (int)(10*arguments.getH()) + ".out";
 
@@ -27,7 +26,6 @@ class ProgramRunner {
         result = Integer.parseInt(bri.readLine().trim());
         order = Arrays.stream(bri.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         bri.close();
-        p.waitFor();
     }
 
     int[] getOrder() {
