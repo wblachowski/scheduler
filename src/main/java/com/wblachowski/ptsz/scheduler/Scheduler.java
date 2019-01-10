@@ -15,18 +15,11 @@ import java.util.List;
 
 public class Scheduler {
 
-    private static final int MILLIS_FILE_SAVE_DURATION = 50;
+    private static final int MILLIS_FILE_SAVE_DURATION = 100;
 
     public static void main(String[] args) {
-        Scheduler scheduler = new Scheduler(args, "greedy");
+        Scheduler scheduler = new Scheduler(args, "genetic");
         scheduler.start();
-        System.out.println("Greedy:");
-        System.out.println(scheduler.getResult());
-        for (Job job : scheduler.getJobs()) System.out.print(job.getIndex() + " ");
-
-        scheduler = new Scheduler(args, "genetic");
-        scheduler.start();
-        System.out.println("\nGenetic:");
         System.out.println(scheduler.getResult());
         for (Job job : scheduler.getJobs()) System.out.print(job.getIndex() + " ");
     }
