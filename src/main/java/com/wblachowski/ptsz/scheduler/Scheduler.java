@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Scheduler {
 
-    private static final int MILLIS_FILE_SAVE_DURATION = 100;
+    private static final int MILLIS_FILE_SAVE_DURATION = 50;
 
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(args, "genetic");
