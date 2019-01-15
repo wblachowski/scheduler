@@ -14,10 +14,10 @@ public class Application {
         ResultReader resultReader = new ResultReader();
         double errorSum = 0.0;
         double timeSum = 0.0;
-        for (int n : ns) {
-            for (int k = 4; k <= 9; k += 5) {
-                int[] results = resultReader.getResults(n, k);
-                for (int h = 4; h <= 6; h += 2) {
+        int k=1;
+        for (int h = 2; h <= 8; h += 2) {
+                for (int n : ns) {
+                    int[] results = resultReader.getResults(n, k);
                     int optimalResult = results[h / 2 - 1];
                     String[] testerArgsRaw = new String[]{String.valueOf(n), String.valueOf(k), String.valueOf((double) h / 10), program};
                     TesterInputArguments arguments = new TesterInputArguments(testerArgsRaw);
@@ -33,8 +33,8 @@ public class Application {
                     errorSum += error;
                     timeSum += runner.getExecutionTime();
                     System.out.printf("Correct: %s\nProgram result: %d\nReal result: %d\nOptimal result: %d\nError: %f\nTime: %f\n", tester.isCorrect(), runner.getResult(), tester.getRealResult(), optimalResult, error, runner.getExecutionTime());
+                    k=k%10+1;
                 }
-            }
         }
 
         System.out.printf("Avg error: %f\nAvg time: %f", errorSum / 28.0, timeSum / 28.0);
